@@ -1,0 +1,462 @@
+html, body {
+    height: 100%;
+    margin: 0;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    background-color: #F7F7F7;
+}
+
+.container {
+    flex: 1;
+}
+
+header {
+    background-color: #249FE5;
+    width: 100%;
+    height: 50px;
+    top: 0;
+    display: flex;
+    position: absolute;
+    align-items: center;
+    box-sizing: border-box;
+    padding: 0 20px;
+    box-sizing: border-box;
+    font-family: Arial, Helvetica, sans-serif ;
+}
+
+header #menu_bar{
+    cursor: pointer;
+}
+
+header a {
+    padding-left: 50px;
+    color: #F2F2F2;
+    text-decoration: none;
+}
+
+header ul {
+    list-style-type: none;
+    display: flex;
+    align-items: center;
+    margin: 0;
+    padding: 0;
+}
+
+header li {
+    margin-right: 20px;
+    font-size: 20px;
+    color: #F2F2F2;
+}
+
+header .menu-btn{
+    cursor: pointer;
+}
+
+header .dropdown {
+    float: right;
+    overflow: hidden;
+}
+
+header .dropdown .dropbtn {
+    cursor: pointer;
+    font-size: 16px;  
+    border: none;
+    outline: none;
+    color: white;
+    background-color: inherit;
+    font-family: inherit;
+    margin: 0;
+}
+
+header .dropdown-content {
+    margin-top: 14px;
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+}
+
+header .dropdown-content a {
+    float: none;
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    text-align: left;
+}
+
+header .dropdown-content a:hover {
+    background-color: #ddd;
+}
+
+header .show {
+    display: block;
+}
+
+.login{
+    position: fixed;
+    font-family: Arial, Helvetica, sans-serif ;
+    height: 240px;
+    width: 270px;
+    right: 0;
+    top: 80px;
+    border: 2px solid #CED4DA;
+    background-color: #FFFFFF;
+}
+
+.login h2{
+    margin-left: 25px;
+    color: #219DE5;
+}
+.login input{
+    width: 245px;
+    height: 37px;
+    border-radius: 5px;
+    margin-top: 5px;
+    margin-left: 9px;
+    outline: none;
+    border: 2px solid #CED4DA;
+}
+
+.login input:focus{
+    border: 4px solid #CAE8F8;
+}
+
+.login button{
+    margin-top: 5px;
+    border: 2px solid #CED4DA;
+    border-radius: 5px;
+    background-color: #2CA2E6;
+    color: #FFFFFF;
+    margin-left: 12px;
+    width: 245px;
+    height: 36px;
+    cursor: pointer;
+}
+
+.login button:hover{
+    font-size: 15px;
+}
+
+.container_menu{
+    width: 240px;
+    margin-left: 0;
+    height: 100%;
+    background-color: #F2F2F2;
+    position: absolute;
+    top: 50px;
+    transition: width 0.2s ease-in-out;
+}
+
+.menu {
+    height: auto;
+    width: 260px;
+    margin-top: 30px;
+    margin-left: 20px;
+    padding: 0;
+    z-index: 1000;
+    display: flex;
+    transition: width ease-in-out 0.3s;
+}
+  
+.menu ul {
+    width: 200px;
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    font-family: Arial, Helvetica, sans-serif ;
+    background-color: #FFFFFF;
+    justify-content: space-between;
+  }
+  
+.menu li {  
+    margin: 0;
+    padding: 10px; 
+    list-style: none;
+}
+.menu ul li{
+    padding: 12px 16px;
+    border:1px solid #DFDFDF;
+}
+
+.menu ul a li{
+    color: black;
+}
+
+.menu ul a{
+    text-decoration: none;
+}
+
+.menu ul li:hover{
+    background-color: #F2F2F2;
+}
+
+.menu_add .add{
+    list-style: none;
+    display: flex;
+    margin-left: 400px;
+}
+
+.filter{
+    margin-top: 40px;
+    margin-left: 292px;
+    display: inline-block; 
+}
+
+.filter select{
+    width: 200px;
+    height: 40px;
+    border-radius: 5px;
+    border: 2px solid grey;
+}
+
+.filter button{
+    width: 60px;
+    height: 40px;
+    background-color: #219DE5;
+    color: #FFFFFF;
+    border-radius: 5px;
+    border: 2px solid grey;
+    cursor: pointer;
+}
+
+
+.note{
+    text-align: center;
+    background-color: #249FE5;
+    padding: auto;
+    padding-top: 15px;
+    padding-bottom: 15px;
+}
+
+.note b{
+    font-family: Arial, Helvetica, sans-serif ;
+    color: #FFFFFF;
+}
+
+table{
+    max-width: 1227px;
+    width: 100%;
+    margin-top: 20px;
+    background-color: white;
+    margin-left: 292px;
+    font-family: Arial, Helvetica, sans-serif ;
+}
+
+table, th, td {
+    border-collapse: collapse;
+    border:1px solid #DEE2E6;
+    text-align: center;
+}
+
+table, th{
+    border-collapse: collapse;
+    border:1px solid #DEE2E6;
+    text-align: center;
+}
+
+table th select option{
+    text-align: center;
+}
+
+table #header_row{
+    cursor: pointer;
+    height: 50px;
+    color: #FFFFFF;
+    background-color: #249FE5;
+}
+
+table #row td{
+    height: 30px;
+}
+
+table #row:hover{
+    background-color: #DADADA;
+    cursor:pointer;
+}
+
+table #row td:hover{
+    background-color: #ECECEC;
+    cursor:pointer;
+} 
+
+table #task  {
+    width: 142px;
+    letter-spacing: 15px;
+    color: #249FE6;
+} 
+
+table #task  {
+    width: 150px;
+    letter-spacing: 25px;
+} 
+
+table #task a {
+    color: #249FE6;
+} 
+
+table .my {
+    display: block;
+}
+
+table .myDIV {
+    margin-left: 12px;
+    display: none;
+    height: 30px;
+}
+
+.space{
+    height: 100px;
+}
+
+.failure{
+    list-style: none;
+    display: flex;
+    font-family: Arial, Helvetica, sans-serif ;
+}
+
+.failure_add{
+    width: 1000px;
+    height: 605px;
+    margin-right: 100px;
+    margin-left: 292px;
+    padding-top: 100px;
+    background-color: #FFFFFF;
+    border: 1px solid #E3E3E3;
+}
+
+.failure_add h2{
+    margin-left: 25px;
+    color: #249FE5;
+    margin-top: -28px;
+}
+
+.failure_add table{
+    width: 960px;
+    background-color: white;
+    margin-left: 20px;
+}
+
+
+.failure_add table, th, td {
+    border-collapse: collapse;
+    border:1px solid #DEE2E6;
+    text-align: center;
+}
+
+.failure_add table, th{
+    border-collapse: collapse;
+    height: 50px;
+    border:1px solid #DEE2E6;
+    text-align: center;
+}
+
+.failure_add table #header_row{
+    cursor: pointer;
+    height: 50px;
+    color: #FFFFFF;
+    background-color: #249FE5;
+}
+
+.failure_add table #row:hover{
+    background-color: #DADADA;
+    cursor:pointer;
+}
+
+.failure_add table #row td:hover{
+    background-color: #ECECEC;
+    cursor:pointer;
+} 
+
+#ma_hoc_phan{
+    margin-left: 25px;
+    border-radius: 5px;
+    height: 30px;
+    width: 400px;
+}
+
+#ma_hoc_phan:focus{
+    border: 2px solid #1a73e8;
+}
+
+.failure button{
+    margin-bottom: 20px;
+    width: 100px;
+    margin: 0 auto;
+    color: #FFFFFF;
+    height: 30px;
+    margin-top: 20px;
+    border-radius: 5px;
+    border: 1px solid grey;
+    background-color: #4CB0EA;    
+}
+
+.failure button:hover{
+    background-color: #249FE5;
+    cursor:pointer;
+}
+
+.add{
+    width: 450px;
+    height: 370px;
+    text-align: center;
+    margin-right: 100px;
+    padding-top: 50px;
+    background-color: #FFFFFF;
+    border: 1px solid #E3E3E3;
+    margin-right: 0px;
+}
+
+.add input{
+    width: 300px;
+    height: 40px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    border: 2px solid grey;
+    padding-left: 20px;
+    outline: none;
+}
+
+.add button{
+    border-radius: 5px ;
+    background-color: #FFFFFF;
+    border: solid #6C757D;
+    color: #6C757D;
+    cursor: pointer;
+    width: 60px;
+    height: 38px;
+}
+
+.add button:hover{
+    background-color: #6C757D;
+    color: #FFFFFF;
+}
+
+.add select{
+    width: 300px;
+    height: 40px;
+    border-radius: 5px;
+    border: 2px solid grey;
+}
+
+footer {
+    background-color: #249FE5;
+    width: 100%;
+    height: 50px;
+    text-align: center;
+    color: white;
+    font-family: Arial, Helvetica, sans-serif ;
+    bottom: 0;
+    position: fixed;
+} 
+footer p{
+    padding-bottom: 5px ;
+}
+footer a{
+    color: white;
+}

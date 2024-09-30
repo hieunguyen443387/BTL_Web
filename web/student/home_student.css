@@ -1,0 +1,292 @@
+html, body {
+    height: 100%;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    background-color: #f0f0f0;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh; 
+}
+
+.main {
+    flex: 1; 
+    overflow: auto;
+}
+
+
+header {
+    background-color: #2CA2E6;
+    width: 100%;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    box-sizing: border-box;
+    padding: 0 20px;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+header a {
+    padding-left: 50px;
+    color: #D7EDF9;
+    text-decoration: none;
+}
+
+header a:hover {
+    color: #FFFFFF;
+}
+
+header ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+header li {
+    display: inline;
+    font-size: 20px;
+    margin-right: 20px;
+    color: #D7EDF9;
+}
+
+.login {
+    position: absolute;
+    font-family: Arial, Helvetica, sans-serif;
+    height: 240px;
+    width: 270px;
+    right: 0;
+    top: 80px;
+    border: 2px solid #CED4DA;
+    background-color: #FFFFFF;
+}
+
+.login h2 {
+    margin-left: 25px;
+    color: #219DE5;
+}
+
+.login li {
+    list-style: none;
+    left: 0px;
+    border-bottom: 1px solid #DFDFDF;
+    padding: 12px 5px;
+    color: #2FA4E7;
+}
+
+.login button {
+    margin-top: 5px;
+    border: 2px solid #CED4DA;
+    border-radius: 5px;
+    background-color: #E45901;
+    margin-left: 12px;
+    width: 245px;
+    height: 36px;
+    cursor: pointer;
+}
+
+.login button a {
+    text-decoration: none;
+    color: #FFFFFF;
+}
+
+.login button:hover {
+    font-size: 15px;
+}
+
+.student_infor {
+    position: absolute;
+    width: 697px;
+    height: 341px;
+    left: 22px;
+    top: 80px;
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: #FFFFFF;
+}
+
+.student_infor h3 {
+    padding-left: 17px;
+    color: #219DE5;
+}
+
+.student_infor li {
+    list-style: none;
+    padding: 12px 4px;
+}
+
+.course_infor {
+    position: absolute;
+    width: 697px;
+    height: 341px;
+    left: 22px;
+    top: 451px;
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: #FFFFFF;
+}
+
+.course_infor h3 {
+    padding-left: 17px;
+    color: #219DE5;
+}
+
+.course_infor li {
+    list-style: none;
+    padding: 12px 4px;
+}
+
+.teacher {
+    position: absolute;
+    width: 697px;
+    height: 200px;
+    left: 22px;
+    padding-bottom: 30px;
+    top: 822px;
+    bottom: 300px;
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: #FFFFFF;
+}
+
+.teacher h3 {
+    padding-left: 17px;
+    color: #219DE5;
+}
+
+.teacher li {
+    list-style: none;
+    padding: 12px 4px;
+}
+
+.space{
+    position: absolute;
+    height: 200px;
+    width: 697px;
+    top: 1022px;
+}
+
+.menu {
+    position: absolute;
+    font-family: Arial, Helvetica, sans-serif;
+    height: 150px;
+    width: 270px;
+    right: 0;
+    top: 380px;
+    border: 2px solid #CED4DA;
+    background-color: #FFFFFF;
+}
+
+.menu h2 {
+    margin-left: 25px;
+    color: #219DE5;
+}
+
+.menu a {
+    list-style: none;
+    text-decoration: none;
+}
+
+.menu a li {
+    left: 0px;
+    border-bottom: 1px solid #DFDFDF;
+    padding: 12px 5px;
+    color: #2FA4E7;
+}
+
+.menu a li:hover {
+    color: #157AB5;
+}
+
+.xem_diem{
+    width: 1215px;
+    height: 476px;
+    font-family: Arial, Helvetica, sans-serif;
+    padding-left: 5px;
+    background-color: #E3E3E3;
+}
+
+.xem_diem h2{
+    color: #FFFFFF;
+    background-color: #249FE5;
+    height: 38px;
+    display: flex;
+    align-items: center;
+    padding-left: 10px;
+}
+table{
+    max-width: 1205px;
+    width: 100%;
+    background-color: white;
+    margin-left: 2px;
+}
+
+table .header_row{
+    cursor: pointer;
+    height: 50px;
+    color: #FFFFFF;
+    background-color: #249FE5;
+}
+
+table #row td{
+    height: 30px;
+}
+
+table #row:hover{
+    background-color: #DADADA;
+    cursor:pointer;
+}
+
+table #row td:hover{
+    background-color: #ECECEC;
+    cursor:pointer;
+} 
+
+#tin_chi {
+    width: 62px;
+}
+
+#diem {
+    width: 74px;
+}
+
+table, th, td {
+    border-collapse: collapse;
+    border:1px solid #DEE2E6;
+    text-align: center;
+    height: 30px;
+}
+
+table, th{
+    border-collapse: collapse;
+    height: 50px;
+    border:1px solid #DEE2E6;
+    text-align: center;
+}
+
+table th select option{
+    text-align: center;
+}
+
+table td:hover{
+    background-color: #ECECEC;
+    cursor:pointer;
+}
+
+footer {
+    background-color: #2CA2E6;
+    width: 100%;
+    height: 50px;
+    text-align: center;
+    color: white;
+    font-family: Arial, Helvetica, sans-serif;
+    bottom: 0;
+    position: fixed; 
+}
+
+footer p {
+    padding-bottom: 5px;
+}
