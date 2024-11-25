@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 30, 2024 at 05:14 PM
+-- Generation Time: Nov 25, 2024 at 12:41 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -60,14 +60,6 @@ CREATE TABLE `bang_diem_nhom` (
   `diem_c` int(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Dumping data for table `bang_diem_nhom`
---
-
-INSERT INTO `bang_diem_nhom` (`ma_nhom`, `msv`, `mgv`, `diem_a`, `diem_b`, `diem_c`) VALUES
-(2, 1313, 4141, 0, 0, 10),
-(200, 1212, 4141, 0, 0, 10);
-
 -- --------------------------------------------------------
 
 --
@@ -113,33 +105,6 @@ CREATE TABLE `danh_sach_lop` (
   `ten` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Dumping data for table `danh_sach_lop`
---
-
-INSERT INTO `danh_sach_lop` (`ma_lop`, `msv`, `ho_dem`, `ten`) VALUES
-('DCCTCT66_07A', 1212, 'Lê', 'Minh'),
-('DCCTCT66_07B', 1313, 'Lương Triều', 'Vỹ');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `danh_sach_lop_thuoc_chuyen_nganh`
---
-
-CREATE TABLE `danh_sach_lop_thuoc_chuyen_nganh` (
-  `ma_lop` varchar(15) NOT NULL,
-  `ma_chuyen_nganh` varchar(10) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `danh_sach_lop_thuoc_chuyen_nganh`
---
-
-INSERT INTO `danh_sach_lop_thuoc_chuyen_nganh` (`ma_lop`, `ma_chuyen_nganh`) VALUES
-('DCCTCT66_07A', 'CNPM'),
-('DCCTCT66_07B', 'HTTT');
-
 -- --------------------------------------------------------
 
 --
@@ -156,8 +121,7 @@ CREATE TABLE `danh_sach_lop_thuoc_khoa` (
 --
 
 INSERT INTO `danh_sach_lop_thuoc_khoa` (`ma_lop`, `ma_khoa`) VALUES
-('DCCTCT66_07A', 'CNTT'),
-('DCCTCT66_07B', 'CNTT');
+('DCCTCT66_07A', 'CNTT');
 
 -- --------------------------------------------------------
 
@@ -175,8 +139,7 @@ CREATE TABLE `danh_sach_lop_thuoc_nganh` (
 --
 
 INSERT INTO `danh_sach_lop_thuoc_nganh` (`ma_lop`, `ma_nganh`) VALUES
-('DCCTCT66_07A', 'CNTT'),
-('DCCTCT66_07B', 'CNTT');
+('DCCTCT66_07A', 'CNTT');
 
 -- --------------------------------------------------------
 
@@ -191,14 +154,6 @@ CREATE TABLE `danh_sach_sinh_vien` (
   `ten` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Dumping data for table `danh_sach_sinh_vien`
---
-
-INSERT INTO `danh_sach_sinh_vien` (`ma_nhom`, `msv`, `ho_dem`, `ten`) VALUES
-(2, 1313, 'Lương Triều', 'Vỹ'),
-(200, 1212, 'Lê', 'Minh');
-
 -- --------------------------------------------------------
 
 --
@@ -209,14 +164,6 @@ CREATE TABLE `danh_sach_sinh_vien_chuyen_nganh` (
   `ma_chuyen_nganh` varchar(10) NOT NULL,
   `msv` int(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `danh_sach_sinh_vien_chuyen_nganh`
---
-
-INSERT INTO `danh_sach_sinh_vien_chuyen_nganh` (`ma_chuyen_nganh`, `msv`) VALUES
-('CNPM', 1212),
-('HTTT', 1313);
 
 -- --------------------------------------------------------
 
@@ -229,14 +176,6 @@ CREATE TABLE `danh_sach_sinh_vien_khoa` (
   `msv` int(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Dumping data for table `danh_sach_sinh_vien_khoa`
---
-
-INSERT INTO `danh_sach_sinh_vien_khoa` (`ma_khoa`, `msv`) VALUES
-('CNTT', 1212),
-('CNTT', 1313);
-
 -- --------------------------------------------------------
 
 --
@@ -247,14 +186,6 @@ CREATE TABLE `danh_sach_sinh_vien_nganh` (
   `ma_nganh` varchar(10) NOT NULL,
   `msv` int(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `danh_sach_sinh_vien_nganh`
---
-
-INSERT INTO `danh_sach_sinh_vien_nganh` (`ma_nganh`, `msv`) VALUES
-('CNTT', 1212),
-('CNTT', 1313);
 
 -- --------------------------------------------------------
 
@@ -271,25 +202,6 @@ CREATE TABLE `diem_hoc_phan` (
   `diem_tb_4` float DEFAULT NULL,
   `diem_tb_10` float DEFAULT NULL,
   `diem_tb_chu` varchar(5) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `diem_hoc_phan`
---
-
-INSERT INTO `diem_hoc_phan` (`ma_hoc_phan`, `msv`, `diem_a`, `diem_b`, `diem_c`, `diem_tb_4`, `diem_tb_10`, `diem_tb_chu`) VALUES
-(7080107, 1212, 0, 0, 10, 0, 1, 'F'),
-(7080107, 1313, 0, 0, 10, 0, 1, 'F');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `diem_ren_luyen`
---
-
-CREATE TABLE `diem_ren_luyen` (
-  `msv` int(10) NOT NULL,
-  `drl` int(10) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -338,6 +250,7 @@ CREATE TABLE `hoc_phan` (
 --
 
 INSERT INTO `hoc_phan` (`ma_hoc_phan`, `ten_hoc_phan`, `so_tin_chi`, `ma_nganh`) VALUES
+(7080104, 'Pháp luật đại cương', 3, 'CNTT'),
 (7080107, 'Kiểm thử và đảm bảo chất lượng', 3, 'CNTT'),
 (7080111, 'Mã nguồn mở', 2, 'CNTT'),
 (7080113, 'Phân tích & thiết kế hệ thống và BTL', 3, 'CNTT'),
@@ -377,7 +290,10 @@ CREATE TABLE `khoa` (
 INSERT INTO `khoa` (`ma_khoa`, `ten_khoa`) VALUES
 ('CD', 'Cơ điện'),
 ('CNTT', 'Công nghệ thông tin'),
+('CT', 'Lý luận chính trị'),
 ('DKNL', 'Dầu khí & Năng lượng'),
+('GDQP', 'Giáo dục quốc phòng'),
+('KHCB', 'Khoa học cơ bản'),
 ('KTDC', 'Kĩ thuật địa chất'),
 ('KT_QTKD', 'Kinh tế & Quản trị kinh doanh'),
 ('MO', 'Mỏ'),
@@ -403,8 +319,7 @@ CREATE TABLE `lop` (
 --
 
 INSERT INTO `lop` (`ma_lop`, `mgv`, `ma_chuyen_nganh`, `so_luong`) VALUES
-('DCCTCT66_07A', 2121, 'CNPM', 50),
-('DCCTCT66_07B', 5151, 'HTTT', 60);
+('DCCTCT66_07A', 2121, 'CNPM', 50);
 
 -- --------------------------------------------------------
 
@@ -427,6 +342,7 @@ INSERT INTO `nganh` (`ma_nganh`, `ma_khoa`, `ten_nganh`) VALUES
 ('CNKTKH', 'DKNL', 'Công nghệ kỹ thuật hóa học'),
 ('CNTT', 'CNTT', 'Công nghệ thông tin'),
 ('CNTT(CLC)', 'CNTT', 'Công nghệ thông tin (chất lượng cao)'),
+('CTL', 'KHCB', 'Cơ lý thuyết'),
 ('DCH', 'KTDC', 'Địa chất học'),
 ('DKTCD', 'KTDC', 'Địa kỹ thuật xây dựng'),
 ('DTH', 'TDBD', 'Địa tin học'),
@@ -475,7 +391,6 @@ CREATE TABLE `nhom_hoc_phan` (
 --
 
 INSERT INTO `nhom_hoc_phan` (`ma_nhom`, `mgv`, `ma_lop`, `ma_hoc_phan`, `so_luong`) VALUES
-(2, 4141, 'DCCTCT66_07B', 7080107, 60),
 (200, 4141, 'DCCTCT66_07A', 7080107, 60);
 
 -- --------------------------------------------------------
@@ -496,14 +411,6 @@ CREATE TABLE `sinh_vien` (
   `gioi_tinh` varchar(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Dumping data for table `sinh_vien`
---
-
-INSERT INTO `sinh_vien` (`msv`, `ma_lop`, `ho_dem`, `ten`, `sdt`, `email`, `mat_khau`, `ngay_sinh`, `gioi_tinh`) VALUES
-(1212, 'DCCTCT66_07A', 'Lê', 'Minh', 987654321, 'leminh@gmail.com', 'leminh', '2024-09-11', 'Nam'),
-(1313, 'DCCTCT66_07B', 'Lương Triều', 'Vỹ', 987654321, 'trieuvy@gmail.com', 'trieuvy', '2024-09-07', 'Nam');
-
 -- --------------------------------------------------------
 
 --
@@ -514,14 +421,6 @@ CREATE TABLE `sinh_vien_truot_mon` (
   `ma_hoc_phan` int(7) NOT NULL,
   `msv` int(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `sinh_vien_truot_mon`
---
-
-INSERT INTO `sinh_vien_truot_mon` (`ma_hoc_phan`, `msv`) VALUES
-(7080107, 1212),
-(7080107, 1313);
 
 --
 -- Indexes for dumped tables
@@ -554,13 +453,6 @@ ALTER TABLE `chuyen_nganh`
 ALTER TABLE `danh_sach_lop`
   ADD PRIMARY KEY (`ma_lop`,`msv`),
   ADD KEY `msv` (`msv`);
-
---
--- Indexes for table `danh_sach_lop_thuoc_chuyen_nganh`
---
-ALTER TABLE `danh_sach_lop_thuoc_chuyen_nganh`
-  ADD PRIMARY KEY (`ma_lop`,`ma_chuyen_nganh`),
-  ADD KEY `ma_chuyen_nganh` (`ma_chuyen_nganh`);
 
 --
 -- Indexes for table `danh_sach_lop_thuoc_khoa`
@@ -610,12 +502,6 @@ ALTER TABLE `danh_sach_sinh_vien_nganh`
 ALTER TABLE `diem_hoc_phan`
   ADD PRIMARY KEY (`ma_hoc_phan`,`msv`),
   ADD KEY `msv` (`msv`);
-
---
--- Indexes for table `diem_ren_luyen`
---
-ALTER TABLE `diem_ren_luyen`
-  ADD PRIMARY KEY (`msv`);
 
 --
 -- Indexes for table `giang_vien`
@@ -711,13 +597,6 @@ ALTER TABLE `danh_sach_lop`
   ADD CONSTRAINT `danh_sach_lop_ibfk_2` FOREIGN KEY (`msv`) REFERENCES `sinh_vien` (`msv`) ON DELETE CASCADE;
 
 --
--- Constraints for table `danh_sach_lop_thuoc_chuyen_nganh`
---
-ALTER TABLE `danh_sach_lop_thuoc_chuyen_nganh`
-  ADD CONSTRAINT `danh_sach_lop_thuoc_chuyen_nganh_ibfk_1` FOREIGN KEY (`ma_lop`) REFERENCES `lop` (`ma_lop`) ON DELETE CASCADE,
-  ADD CONSTRAINT `danh_sach_lop_thuoc_chuyen_nganh_ibfk_2` FOREIGN KEY (`ma_chuyen_nganh`) REFERENCES `chuyen_nganh` (`ma_chuyen_nganh`) ON DELETE CASCADE;
-
---
 -- Constraints for table `danh_sach_lop_thuoc_khoa`
 --
 ALTER TABLE `danh_sach_lop_thuoc_khoa`
@@ -765,12 +644,6 @@ ALTER TABLE `danh_sach_sinh_vien_nganh`
 ALTER TABLE `diem_hoc_phan`
   ADD CONSTRAINT `diem_hoc_phan_ibfk_1` FOREIGN KEY (`ma_hoc_phan`) REFERENCES `hoc_phan` (`ma_hoc_phan`) ON DELETE CASCADE,
   ADD CONSTRAINT `diem_hoc_phan_ibfk_2` FOREIGN KEY (`msv`) REFERENCES `sinh_vien` (`msv`) ON DELETE CASCADE;
-
---
--- Constraints for table `diem_ren_luyen`
---
-ALTER TABLE `diem_ren_luyen`
-  ADD CONSTRAINT `diem_ren_luyen_ibfk_1` FOREIGN KEY (`msv`) REFERENCES `sinh_vien` (`msv`) ON DELETE CASCADE;
 
 --
 -- Constraints for table `giang_vien`
