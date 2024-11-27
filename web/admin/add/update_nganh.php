@@ -23,7 +23,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         }
     }
 }
- else { 
+else { 
     if (isset($_GET['ma_nganh'])) {
        
         $ma_nganh = mysqli_real_escape_string($conn, $_GET['ma_nganh']);
@@ -75,18 +75,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                         <input type="text" id="ten_nganh" name="ten_nganh" placeholder="Tên ngành" value = "<?php echo $ten_nganh; ?>">
                         <br>
                         <select name="ma_khoa" id="ma_khoa">
-                        <option value="<?php echo $ma_khoa; ?>">-- Chọn khoa --</option>
+                        <option value="">-- Chọn khoa --</option>
                         <?php
                             
-                            $sql = "SELECT ma_khoa, ten_khoa FROM khoa";
-                            $result = $conn->query($sql);
-
-                            if ($result->num_rows > 0) {
-                                // output data of each row
-                            while($row = $result->fetch_assoc()) {
-                                echo '<option value="' . $row['ma_khoa'] . '">' . $row['ten_khoa'] . '</option>';
-                                }
-                            }
+                            $ma_nganh = $_GET["ma_nganh"];
+                            include('selected.php'); 
+                                 
                         ?>
                         </select>
                     </div>

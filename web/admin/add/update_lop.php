@@ -18,10 +18,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $sql_update_lop = "UPDATE lop SET ma_lop = '$ma_lop', mgv = '$mgv', ma_chuyen_nganh = '$ma_chuyen_nganh', so_luong = '$so_luong' WHERE ma_lop = '$ma_lop'";
             $sql_update_lop_thuoc_khoa = "UPDATE danh_sach_lop_thuoc_khoa SET ma_lop = '$ma_lop', ma_khoa = '$ma_khoa' WHERE ma_lop = '$ma_lop'";
             $sql_update_lop_thuoc_nganh = "UPDATE danh_sach_lop_thuoc_nganh SET ma_lop = '$ma_lop', ma_nganh = '$ma_nganh' WHERE ma_lop = '$ma_lop'";
-            $sql_update_lop_thuoc_chuyen_nganh = "UPDATE danh_sach_lop_thuoc_chuyen_nganh SET ma_lop = '$ma_lop', ma_chuyen_nganh = '$ma_chuyen_nganh' WHERE ma_lop = '$ma_lop'";
 
             if ($conn->query($sql_update_lop) === TRUE && $conn->query($sql_update_lop_thuoc_khoa) === TRUE 
-            && $conn->query($sql_update_lop_thuoc_nganh) === TRUE && $conn->query($sql_update_lop_thuoc_chuyen_nganh) === TRUE) {
+            && $conn->query($sql_update_lop_thuoc_nganh) === TRUE) {
                 echo "Cập nhật thành công";
                 header("Location: /web/admin/add/lop.php");
                 exit();
@@ -31,7 +30,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         }
     }
 }
- else { 
+else { 
     if (isset($_GET['ma_lop'])) {
        
         $ma_lop = mysqli_real_escape_string($conn, $_GET['ma_lop']);
@@ -99,28 +98,32 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         <?php
             require "../home_admin/header.php";
         ?>
-        <ul class="menu_add">
+        <div class="menu_add">
             <?php
                 require "../home_admin/menu.php";
             ?>
             <li class="add" style = "height: 433px;">
-                <form action="update_lop.php?ma_lop=<?php echo $ma_lop; ?>" method="post">
+                <form action="?ma_lop=update_lop.php?ma_lop=<?php echo $ma_lop; ?>" method="post">
                     <h3>Cập nhật lớp <?php echo $ma_lop; ?> </h3>
                     <div class="input_lop">
                         <input type="number" id="so_luong" name="so_luong" min="20" max="120" placeholder="Số lượng sinh viên" value = "<?php echo $so_luong; ?>">
                         <br>
                         <select name="ma_khoa" id="ma_khoa" >
-                            <option value="<?php echo $ma_khoa; ?>">Lọc theo khoa</option>
+                            <option value="">Lọc theo khoa</option>
                             <?php
                             include('../home_admin/config.php');
-                            $sql = "SELECT ma_khoa, ten_khoa FROM khoa";
-                            $result = $conn->query($sql);
+                            $ma_lop = $_GET["ma_lop"];
+                            $sql_get_lop = "SELECT * FROM lop WHERE ma_lop = '$ma_lop'";
+                            $result_get_lop = $conn->query($sql_get_lop); // chạy query
+                            $pass_lop = $result_get_lop->fetch_assoc();
+                            $ma_chuyen_nganh = $pass_lop['ma_chuyen_nganh'];
 
-                            if ($result->num_rows > 0) {
-                                while($row = $result->fetch_assoc()) {
-                                    echo '<option value="' . $row['ma_khoa'] . '">' . $row['ten_khoa'] . '</option>';
-                                }
-                            }
+                            $sql_get_chuyen_nganh = "SELECT * FROM chuyen_nganh WHERE ma_chuyen_nganh = '$ma_chuyen_nganh'";
+                            $result_get_chuyen_nganh = $conn->query($sql_get_chuyen_nganh); // chạy query
+                            $pass_chuyen_nganh = $result_get_chuyen_nganh->fetch_assoc();
+                            $ma_nganh = $pass_chuyen_nganh['ma_nganh'];
+
+                            include('selected.php'); 
                             ?>
                         </select>      
                         <br>
@@ -128,17 +131,22 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
                         <!-- Lọc theo ngành -->
                         <select name="ma_nganh" id="ma_nganh">
-                            <option value="<?php echo $ma_nganh; ?>">Lọc theo ngành</option>
+                            <option value="">Lọc theo ngành</option>
                             <?php
 
-                            $sql_nganh = "SELECT ma_nganh, ten_nganh FROM nganh"; 
-                            $result_nganh = $conn->query($sql_nganh);
+                            $sql = "SELECT ma_nganh, ten_nganh FROM nganh ";
+                            $result = $conn->query($sql);
 
-                            if ($result_nganh->num_rows > 0) {
-                                while($row = $result_nganh->fetch_assoc()) {
-                                    echo '<option value="' . $row['ma_nganh'] . '">' . $row['ten_nganh'] . '</option>';
+                            if ($result->num_rows > 0) {
+                                
+                            while($row = $result->fetch_assoc()) {
+                                echo '<option value="' . $row['ma_nganh'] . '"' ;
+                                if ($row['ma_nganh'] == $pass_chuyen_nganh['ma_nganh']) {
+                                    echo ' selected';
                                 }
-                            }
+                                echo '>' . $row['ten_nganh'] . '</option>';
+                                }
+                            }      
                             ?>
                         </select>
                         <br>
@@ -146,15 +154,18 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                             
                         <!-- Lọc theo chuyên ngành -->
                         <select name="ma_chuyen_nganh" id="ma_chuyen_nganh">
-                            <option value="<?php echo $ma_chuyen_nganh; ?>">Lọc theo chuyên ngành</option>
+                            <option value="">Lọc theo chuyên ngành</option>
                             <?php
                             
                             $sql_chuyen_nganh = "SELECT ma_chuyen_nganh, ten_chuyen_nganh FROM chuyen_nganh";
-
                             $result_chuyen_nganh = $conn->query($sql_chuyen_nganh);
                             if ($result_chuyen_nganh->num_rows > 0) {
                                 while($row = $result_chuyen_nganh->fetch_assoc()) {
-                                    echo '<option value="' . $row['ma_chuyen_nganh'] . '">' . $row['ten_chuyen_nganh'] . '</option>';
+                                    echo '<option value="' . $row['ma_chuyen_nganh'] . '"' ;
+                                    if ($row['ma_chuyen_nganh'] == $pass_lop['ma_chuyen_nganh']) {
+                                        echo ' selected';
+                                    }
+                                    echo '>' . $row['ten_chuyen_nganh'] . '</option>';
                                 }
                             }
                             ?>
@@ -164,15 +175,18 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                             
                         <!-- chọn cố vấn -->
                         <select name="mgv" id="mgv">
-                            <option value="<?php echo $mgv; ?>">Lọc giảng viên</option>
+                            <option value="">Chọn giảng viên</option>
                             <?php
                             
                             $sql_giang_vien = "SELECT mgv, ho_dem, ten FROM giang_vien";
-
                             $result_giang_vien = $conn->query($sql_giang_vien);
                             if ($result_giang_vien->num_rows > 0) {
                                 while($row = $result_giang_vien->fetch_assoc()) {
-                                    echo '<option value="' . $row['mgv'] . '">' . $row['ho_dem'] . ' ' . $row['ten'] . '</option>';
+                                    echo '<option value="' . $row['mgv'] . '"' ;
+                                    if ($row['mgv'] == $pass_lop['mgv']) {
+                                        echo ' selected';
+                                    }
+                                    echo '>' . $row['ho_dem'] . ' ' . $row['ten'] . '</option>';
                                 }
                             }
                             ?>
@@ -183,7 +197,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     </div>
                 </form>
             </li>
-        </ul>
+        </div>
     </div>
     <?php
         require "../home_admin/footer.php";

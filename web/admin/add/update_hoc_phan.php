@@ -60,13 +60,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 <title>Nhập ngành</title>
 
 <style>
-    .menu ul a #chuyen_nganh{
+    .menu ul a #hoc_phan{
     background-color: #0F6CBF;
     color: #FFFFFF;
  }
- .input_chuyen_nganh{
-    margin-left: 64px;
- }
+
 </style>
 <body>
     <div class="container">
@@ -85,31 +83,36 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                         <option value="">Lọc theo khoa</option>
                         <?php
                         include('../home_admin/config.php');
-                        $sql = "SELECT ma_khoa, ten_khoa FROM khoa";
-                        $result = $conn->query($sql);
+                        $ma_hoc_phan = $_GET["ma_hoc_phan"];
+                        $sql_get_chuyen_nganh = "SELECT * FROM hoc_phan WHERE ma_hoc_phan = '$ma_hoc_phan'";
+                        $result_get_chuyen_nganh = $conn->query($sql_get_chuyen_nganh); // chạy query
+                        $pass_chuyen_nganh = $result_get_chuyen_nganh->fetch_assoc();
+                        $ma_nganh = $pass_chuyen_nganh['ma_nganh'];
 
-                        if ($result->num_rows > 0) {
-                            while($row = $result->fetch_assoc()) {
-                                echo '<option value="' . $row['ma_khoa'] . '">' . $row['ten_khoa'] . '</option>';
-                            }
-                        }
+                        include('selected.php');
                         ?>
+                        
                     </select>
                     <br>
                     <br>
                     <!-- Lọc theo ngành -->
                     <select name="ma_nganh" id="ma_nganh">
-                        <option value="<?php echo $ma_nganh; ?>">Lọc theo ngành</option>
+                        <option value="">Lọc theo ngành</option>
                         <?php
 
-                        $sql_nganh = "SELECT ma_nganh, ten_nganh FROM nganh"; 
-                        $result_nganh = $conn->query($sql_nganh);
+                            $sql = "SELECT ma_nganh, ten_nganh FROM nganh ";
+                            $result = $conn->query($sql);
 
-                        if ($result_nganh->num_rows > 0) {
-                            while($row = $result_nganh->fetch_assoc()) {
-                                echo '<option value="' . $row['ma_nganh'] . '">' . $row['ten_nganh'] . '</option>';
-                            }
-                        }
+                            if ($result->num_rows > 0) {
+                                
+                            while($row = $result->fetch_assoc()) {
+                                echo '<option value="' . $row['ma_nganh'] . '"' ;
+                                if ($row['ma_nganh'] == $pass_chuyen_nganh['ma_nganh']) {
+                                    echo ' selected';
+                                }
+                                echo '>' . $row['ten_nganh'] . '</option>';
+                                }
+                            }      
                         ?>
                     </select>
                     <br>

@@ -12,7 +12,7 @@
     }
     ?>
 </select>      
-<button type = "submit">Lọc</button>
+
 
 <!-- Lọc theo ngành -->
 <select name="ma_nganh" id="ma_nganh">
@@ -29,7 +29,7 @@
     }
     ?>
 </select>
-<button type = "submit">Lọc</button>
+
     
 <!-- Lọc theo chuyên ngành -->
 <select name="ma_chuyen_nganh" id="ma_chuyen_nganh">
@@ -46,7 +46,7 @@
     }
     ?>
 </select>
-<button type = "submit">Lọc</button>
+
     
     <!-- Lọc theo lớp -->
 <select name="ma_lop" id="ma_lop">

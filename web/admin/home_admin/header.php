@@ -13,6 +13,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/web/admin/home_admin/home_admin.css">
+    <link rel="stylesheet" href="/web/admin/add/phan_trang.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />`
     
     
@@ -46,7 +47,7 @@
                 <div class="dropdown">
                     <button class="dropbtn" onclick="myOpenSign_up()">Quản lý tài khoản <i class="fa fa-caret-down"></i></button>
                     <div class="dropdown-content" id="myDropdown">
-                        <a href="../sign_up/sign_up_admin/quan_ly_admin.php">Admin</a>
+                        <a href="/web/admin/sign_up/sign_up_admin/quan_ly_admin.php">Admin</a>
                         <a href="/web/admin/sign_up/sign_up_teacher/quan_ly_giang_vien.php">Giảng viên</a>
                         <a href="/web/admin/sign_up/sign_up_student/quan_ly_sinh_vien.php">Sinh viên</a>
                     </div>

@@ -96,35 +96,36 @@
             <th>STT</th>
             <th>Mã môn học</th>
             <th>Mã nhóm</th>
-            <th>Tên môn học</th>
+            <th>Học phần</th>
             <th>Giảng viên</th>
             <th>Số lượng</th>
             <th>Tác vụ</th>
         </tr>
 
         <?php
+            require "phan_trang.php";
             if (isset($_POST['ma_khoa']) && !empty($_POST['ma_khoa'])) {
                 $ma_khoa = $_POST['ma_khoa'];
                 $sql_nhom_hoc_phan = "SELECT ma_nhom, mgv, ma_lop, ma_hoc_phan, so_luong FROM nhom_hoc_phan WHERE ma_lop in
-                (select ma_lop from danh_sach_lop_thuoc_khoa where ma_khoa = '$ma_khoa')";
+                (select ma_lop from danh_sach_lop_thuoc_khoa where ma_khoa = '$ma_khoa') LIMIT $limit OFFSET $offset";
             }
             elseif (isset($_POST['ma_nganh']) && !empty($_POST['ma_nganh'])) {
                 $ma_nganh = $_POST['ma_nganh'];
                 $sql_nhom_hoc_phan = "SELECT ma_nhom, mgv, ma_lop, ma_hoc_phan, so_luong FROM nhom_hoc_phan WHERE ma_lop in
-                (select ma_lop from danh_sach_lop_thuoc_nganh where ma_nganh = '$ma_nganh')";
+                (select ma_lop from danh_sach_lop_thuoc_nganh where ma_nganh = '$ma_nganh') LIMIT $limit OFFSET $offset";
             }
             elseif (isset($_POST['ma_hoc_phan']) && !empty($_POST['ma_hoc_phan'])) {
                 $ma_hoc_phan = $_POST['ma_hoc_phan'];
-                $sql_nhom_hoc_phan = "SELECT ma_nhom, mgv, ma_lop, ma_hoc_phan, so_luong FROM nhom_hoc_phan WHERE ma_hoc_phan = '$ma_hoc_phan'";
+                $sql_nhom_hoc_phan = "SELECT ma_nhom, mgv, ma_lop, ma_hoc_phan, so_luong FROM nhom_hoc_phan WHERE ma_hoc_phan = '$ma_hoc_phan' LIMIT $limit OFFSET $offset";
             } else {
             // Lấy danh sách toàn bộ sinh viên
-                $sql_nhom_hoc_phan = "SELECT ma_nhom, mgv, ma_lop, ma_hoc_phan, so_luong FROM nhom_hoc_phan";
+                $sql_nhom_hoc_phan = "SELECT ma_nhom, mgv, ma_lop, ma_hoc_phan, so_luong FROM nhom_hoc_phan LIMIT $limit OFFSET $offset";
             }
             
             $result_nhom_hoc_phan = $conn->query($sql_nhom_hoc_phan);
 
             if ($result_nhom_hoc_phan->num_rows > 0) {
-                $stt = 1;
+                $stt = $offset + 1;
                 while($row = $result_nhom_hoc_phan->fetch_assoc()) {
                     $ma_nhom = $row["ma_nhom"];
                     $mgv = $row["mgv"];
@@ -153,7 +154,7 @@
                         }
                     }
                     echo '<td>' . $so_luong . '</td>';
-                    echo '<td id="task"><a href="update_chuyen_nganh.php?ma_nhom=' . $ma_nhom . '""><i class="fa-solid fa-pen"></i><a href="delete.php?ma_nhom=' . $ma_nhom . '"><i class="fa-solid fa-trash"></i></a></td>';
+                    echo '<td id="task"><a href="update_nhom_hoc_phan.php?ma_nhom=' . $ma_nhom . '"><i class="fa-solid fa-pen"></i></a><a href="delete.php?ma_nhom=' . $ma_nhom . '"><i class="fa-solid fa-trash"></i></a><a href="danh_sach_sinh_vien.php?ma_nhom=' . $ma_nhom . '"><i class="fa-solid fa-eye"></i></a></td>';
                     
                     echo '</tr>';
                 }
@@ -166,7 +167,11 @@
     </form>  
 
 </div>
-        <div class = "space"></div>
+<?php
+    $sql_trang = "SELECT COUNT(*) AS total FROM nhom_hoc_phan";
+    $result_trang = $conn->query($sql_trang);
+    require "so_trang.php";
+?>
         
     
     </div>

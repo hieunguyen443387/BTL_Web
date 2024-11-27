@@ -46,13 +46,12 @@ $mgv = $_SESSION['mgv'];
             
         </ul>
         <button><a href="/web/home/login/logout.php"><b>Đăng xuất</b></a></button>
-        
+        <div id = "change_password"><a href="change_password.php?mgv=<?= $mgv ?>"><i>Đổi mật khẩu</i></a></div>
     </div>
     <div class="menu">
         <h2><i class="fa-solid fa-gears"></i> Tính năng</h2>
         <hr>
         <ul>
-            <a href="trang_nhap_drl.php"><li>> Nhập điểm rèn luyện</li></a>
             <a href="trang_nhap_diem.php"><li>> Nhập điểm</li></a>
             <a href="cap_nhat_diem.php"><li>> Cập nhật điểm</li></a>
         </ul>

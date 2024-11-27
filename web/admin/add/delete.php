@@ -23,7 +23,7 @@ if (isset($_GET['ma_nganh'])) {
 
     if ($conn->query($sql_delete) === TRUE) {
         
-        header("Location: /web/admin/add/nganh.php");
+        header("Location: nganh.php");
         exit();
     } else {
         echo "Lỗi khi xóa nganh: " . $conn->error;

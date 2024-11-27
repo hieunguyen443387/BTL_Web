@@ -25,6 +25,7 @@
                     <th id = "diem">Điểm TK (10)</th>
                     <th id = "diem">Điểm TK (4)</th>
                     <th id = "diem">Điểm TK (C)</th>
+                    <th id = "diem">Kết quả</th>
                 </tr>
                 <?php 
                    
@@ -42,7 +43,8 @@
 
                             $_SESSION['ma_hoc_phan'] = $row_diem["ma_hoc_phan"];
                             $ma_hoc_phan = $_SESSION["ma_hoc_phan"];
-                  
+                            $diem_tb_10 = $row_diem["diem_tb_10"];
+
                             $sql_hoc_phan = "SELECT ma_hoc_phan, ten_hoc_phan, so_tin_chi FROM hoc_phan WHERE ma_hoc_phan = '$ma_hoc_phan'";
                             $result_hoc_phan = $conn->query($sql_hoc_phan);
 
@@ -56,17 +58,23 @@
                                     echo '<td>' . $row_hoc_phan["ma_hoc_phan"] . '</td>';
                                     echo '<td>' . $row_hoc_phan["ten_hoc_phan"] . '</td>';
                                     echo '<td>' . $row_hoc_phan["so_tin_chi"] . '</td>';
-                            } 
+                                } 
+                            }
 
                             // Hiển thị bảng điểm của sinh viên
                             echo '<td>' . $row_diem["diem_a"] . '</td>';
                             echo '<td>' . $row_diem["diem_tb_10"] . '</td>';
                             echo '<td>' . $row_diem["diem_tb_4"] . '</td>';
                             echo '<td>' . $row_diem["diem_tb_chu"] . '</td>';
+                            if ($diem_tb_10 < 5) {
+                                echo '<td><i class="fa-solid fa-x"></i></td>';
+                            } else {
+                                echo '<td><i class="fa-solid fa-check"></i></td>';
+                            }
                             echo '</tr>';
-                       }
-                   } 
-                }
+                       
+                        } 
+                    }
                             
                 ?>
             </table>

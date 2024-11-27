@@ -1,4 +1,4 @@
-a<!DOCTYPE html>
+<!DOCTYPE html>
 <html>
 <title>Nhập khoa</title>
 <style>
@@ -21,6 +21,7 @@ a<!DOCTYPE html>
     line-height: 50px;
     margin-left: 300px;
 }
+
  
 </style>
 <body>
@@ -39,6 +40,7 @@ a<!DOCTYPE html>
             <select name="ma_khoa" id="ma_khoa">
                 <option value="">Lọc theo khoa</option>
                 <?php
+    
                 include('../home_admin/config.php');
                 $sql = "SELECT ma_khoa, ten_khoa FROM khoa";
                 $result = $conn->query($sql);
@@ -65,18 +67,25 @@ a<!DOCTYPE html>
         </tr>
 
         <?php
+            require "phan_trang.php";
+            
             if (isset($_POST['ma_khoa']) && !empty($_POST['ma_khoa'])) {
                 $ma_khoa = $_POST['ma_khoa'];
-                $sql_nganh = "SELECT ma_nganh, ten_nganh, ma_khoa FROM nganh WHERE ma_khoa = '$ma_khoa'";
+                $sql_nganh = "SELECT ma_nganh, ten_nganh, ma_khoa 
+                              FROM nganh 
+                              WHERE ma_khoa = '$ma_khoa' 
+                              LIMIT $limit OFFSET $offset";
             } else {
-            // Lấy danh sách toàn bộ sinh viên
-                $sql_nganh = "SELECT ma_nganh, ten_nganh, ma_khoa FROM nganh";
+               
+                $sql_nganh = "SELECT ma_nganh, ten_nganh, ma_khoa 
+                              FROM nganh 
+                              LIMIT $limit OFFSET $offset";
             }
             
             $result_nganh = $conn->query($sql_nganh);
 
             if ($result_nganh->num_rows > 0) {
-                $stt = 1;
+                $stt = $offset + 1;
                 while($row = $result_nganh->fetch_assoc()) {
                     $ma_nganh = $row["ma_nganh"];
                     $ma_khoa = $row["ma_khoa"];
@@ -93,7 +102,9 @@ a<!DOCTYPE html>
                             echo '<td>' . $row["ten_khoa"] . '</td>';
                         }
                     }
-                    echo '<td id="task"><a href="update_nganh.php?ma_nganh=' . $ma_nganh . '""><i class="fa-solid fa-pen"></i></a><a href="delete.php?ma_nganh=' . $ma_nganh . '"><i class="fa-solid fa-trash"></i></a></td>';
+                    echo '<td id="task"><a href="update_nganh.php?ma_nganh=' . $ma_nganh . '"><i class="fa-solid fa-pen"></i></a>
+                    <a href="delete.php?ma_nganh=' . $ma_nganh . '"><i class="fa-solid fa-trash"></i></a>
+                    </td>';
                     
                     echo '</tr>';
                 }
@@ -104,12 +115,16 @@ a<!DOCTYPE html>
         
     </table>
     </form>  
-
+    <div class="phan_trang">
+    <?php
+        $sql_trang = "SELECT COUNT(*) AS total FROM nganh";
+        $result_trang = $conn->query($sql_trang);
+        require "so_trang.php";
+    ?>
+</div>
 
 </div>
-        <div class = "space"></div>
         
-    
     </div>
     
     <?php

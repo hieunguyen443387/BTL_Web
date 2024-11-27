@@ -42,8 +42,8 @@
                 <th>Tác vụ</th>
             </tr>
             <?php
-                
-                $sql_admin = "SELECT id_admin, ho_dem, ten, sdt, email, ngay_sinh, gioi_tinh FROM admin";
+                require '../../add/phan_trang.php';
+                $sql_admin = "SELECT id_admin, ho_dem, ten, sdt, email, ngay_sinh, gioi_tinh FROM admin LIMIT $limit OFFSET $offset";
                 
                 $result_admin = $conn->query($sql_admin);
 
@@ -79,6 +79,11 @@
             <div class = "space"></div>
         </form>
         </main>
+        <?php
+            $sql_trang = "SELECT COUNT(*) AS total FROM admin";
+            $result_trang = $conn->query($sql_trang);
+            require "../../add/phan_trang.php";
+        ?>
     </div>
     
     <?php

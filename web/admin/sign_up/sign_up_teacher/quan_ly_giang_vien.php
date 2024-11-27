@@ -63,13 +63,14 @@
             <th>Tác vụ</th>
         </tr>
         <?php
-            // Lấy danh sách sinh viên theo lớp
+            require '../../add/phan_trang.php';
+            // Lấy danh sách giảng viên theo khoa
             if (isset($_POST['ma_khoa']) && !empty($_POST['ma_khoa'])) {
                 $ma_khoa = $_POST['ma_khoa'];
-                $sql_giang_vien = "SELECT mgv, ho_dem, ten, ma_khoa, sdt, email, ngay_sinh, gioi_tinh FROM giang_vien WHERE ma_khoa = '$ma_khoa'";
+                $sql_giang_vien = "SELECT mgv, ho_dem, ten, ma_khoa, sdt, email, ngay_sinh, gioi_tinh FROM giang_vien WHERE ma_khoa = '$ma_khoa' LIMIT $limit OFFSET $offset";
             } else {
-            // Lấy danh sách toàn bộ sinh viên
-                $sql_giang_vien = "SELECT mgv, ho_dem, ten, ma_khoa, sdt, email, ngay_sinh, gioi_tinh FROM giang_vien";
+            // Lấy danh sách toàn bộ giảng viên
+                $sql_giang_vien = "SELECT mgv, ho_dem, ten, ma_khoa, sdt, email, ngay_sinh, gioi_tinh FROM giang_vien LIMIT $limit OFFSET $offset";
             }
 
             $result_giang_vien = $conn->query($sql_giang_vien);
@@ -101,13 +102,18 @@
                     echo '</tr>';
                 }
             } else {
-                echo "0 results";
+                echo "<i style='color: red;'>Chưa có giảng viên trong khoa</i>";
             }
         ?>
         </table>
         <div class = "space"></div>
     </form>
-        </main>
+</main>
+<?php
+    $sql_trang = "SELECT COUNT(*) AS total FROM giang_vien";
+    $result_trang = $conn->query($sql_trang);
+    require "../../add/phan_trang.php";
+?>
     </div>
     
     <?php

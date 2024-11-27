@@ -6,7 +6,7 @@
 <script src="fetch_nhom_hoc_phan.js"></script>
 <title>Thống kê sinh viên trượt môn</title>
 <style>
-    .menu ul a #truot{
+    .menu ul a #diem_sinh_vien{
         background-color: #0F6CBF;
         color: #FFFFFF;
     }
@@ -21,10 +21,10 @@
             <?php
                 require "../home_admin/menu.php";
             ?>
-            <div class="failure_add">
-                <h2><i class="fa-solid fa-gears"></i>Thống kê sinh viên trượt môn</h2>
+            <div class="grade_add">
+                <h2><i class="fa-solid fa-gears"></i>Điểm sinh viên</h2>
                 <hr>
-                <form action="sinh_vien_truot_mon.php" method="post">
+                <form action="diem_sinh_vien.php" method="post">
                     <div class = "filter" style="margin-left: 10px;margin-top: 7px;">
                         <!-- Lọc theo khoa -->
                         <select name="ma_khoa" id="ma_khoa" >
@@ -85,34 +85,42 @@
                             <th>Học phần</th>
                             <th>Mã sinh viên</th>
                             <th>Sinh viên</th>
+                            <th>Điểm A</th>
+                            <th>Điểm B</th>
+                            <th>Điểm C</th>
+                            <th>Điểm TK (4)</th>
+                            <th>Điểm TK (10)</th>
+                            <th>Điểm TK (C)</th>
                         </tr>
                         <?php  
                             require "phan_trang.php";
+                            $sql_diem = "SELECT ma_hoc_phan, msv, diem_a, diem_b, diem_c, diem_tb_4, diem_tb_10, diem_tb_chu FROM diem_hoc_phan";
+
                             if (isset($_POST['ma_khoa']) && !empty($_POST['ma_khoa'])) {
                                 $ma_khoa = $_POST['ma_khoa'];
-                                $sql_truot = "SELECT ma_hoc_phan, msv FROM sinh_vien_truot_mon WHERE msv in
-                                (select msv from danh_sach_sinh_vien_khoa where ma_khoa = '$ma_khoa') LIMIT $limit OFFSET $offset";
-                            } 
-                            elseif (isset($_POST['ma_nganh']) && !empty($_POST['ma_nganh'])) {
+                                $sql_diem .= " WHERE msv IN (SELECT msv FROM danh_sach_sinh_vien_khoa WHERE ma_khoa = '$ma_khoa') LIMIT $limit OFFSET $offset";
+                            } elseif (isset($_POST['ma_nganh']) && !empty($_POST['ma_nganh'])) {
                                 $ma_nganh = $_POST['ma_nganh'];
-                                $sql_truot = "SELECT ma_hoc_phan, msv FROM sinh_vien_truot_mon WHERE msv in
-                                (select msv from danh_sach_sinh_vien_nganh where ma_nganh = '$ma_nganh') LIMIT $limit OFFSET $offset";
-                            }
-                            elseif (isset($_POST['ma_nganh']) && !empty($_POST['ma_nganh'])){
-                                $sql_truot = "SELECT ma_hoc_phan, msv FROM sinh_vien_truot_mon WHERE ma_hoc_phan = '$ma_hoc_phan' LIMIT $limit OFFSET $offset";
-                            }
-                            else{
-                                $sql_truot = "SELECT ma_hoc_phan, msv FROM sinh_vien_truot_mon LIMIT $limit OFFSET $offset";
+                                $sql_diem .= " WHERE msv IN (SELECT msv FROM danh_sach_sinh_vien_nganh WHERE ma_nganh = '$ma_nganh') LIMIT $limit OFFSET $offset";
+                            } elseif (isset($_POST['ma_hoc_phan']) && !empty($_POST['ma_hoc_phan'])) {
+                                $ma_hoc_phan = $_POST['ma_hoc_phan'];
+                                $sql_diem .= " WHERE ma_hoc_phan = '$ma_hoc_phan' LIMIT $limit OFFSET $offset";
                             }
                                                         
-                            $result_truot = $conn->query($sql_truot);
+                            $result_diem = $conn->query($sql_diem);
 
-                            if ($result_truot->num_rows > 0) {
-                                $stt = $offset + 1;
-                                while ($row = $result_truot->fetch_assoc()) {
+                            if ($result_diem->num_rows > 0) {
+                                $stt = 1;
+                                while ($row = $result_diem->fetch_assoc()) {
                                     echo '<tr id = "row" style="height: 30px;">';     
                                     echo '<td>' . $stt++ . '</td>';
                                     echo '<td>' . $row["ma_hoc_phan"] . '</td>';
+                                    $diem_a = $row["diem_a"];
+                                    $diem_b = $row["diem_b"];
+                                    $diem_c = $row["diem_c"];
+                                    $diem_tb_4 = $row["diem_tb_4"];
+                                    $diem_tb_10 = $row["diem_tb_10"];
+                                    $diem_tb_chu = $row["diem_tb_chu"];
                                     $_SESSION['ma_hoc_phan'] = $row["ma_hoc_phan"];
                                     $msv = $row["msv"];
                                     
@@ -135,6 +143,12 @@
                                             echo '<td>' . $row["ho_dem"] . " " . $row["ten"] . '</td>';
                                         }
                                     }
+                                    echo '<td>' . $diem_a . '</td>';
+                                    echo '<td>' . $diem_b . '</td>';
+                                    echo '<td>' . $diem_c . '</td>';
+                                    echo '<td>' . $diem_tb_4 . '</td>';
+                                    echo '<td>' . $diem_tb_10 . '</td>';
+                                    echo '<td>' . $diem_tb_chu . '</td>';
                                     
                                     echo '</tr>';
                                 } 
@@ -150,12 +164,13 @@
                 </form>
             </div>
             <?php
-                $sql_trang = "SELECT COUNT(*) AS total FROM sinh_vien_truot_mon";
-                $result_trang = $conn->query($sql_trang); 
+                $sql_trang = "SELECT COUNT(*) AS total FROM diem_hoc_phan";
+                $result_trang = $conn->query($sql_trang);
                 require "so_trang.php";
             ?>
         </div>
     </div>
+  
     <?php
         require "../home_admin/footer.php";
     ?>

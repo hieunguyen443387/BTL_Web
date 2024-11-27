@@ -322,7 +322,7 @@ table .myDIV {
 
 .failure_add{
     width: 1000px;
-    height: 605px;
+    height: 800px;
     margin-right: 100px;
     margin-left: 292px;
     padding-top: 100px;
@@ -411,6 +411,59 @@ table .myDIV {
     border: 1px solid #E3E3E3;
     margin-right: 0px;
 }
+
+.grade_add{
+    width: 1280px;
+    height: 800px;
+    margin-right: 100px;
+    margin-left: 292px;
+    padding-top: 100px;
+    background-color: #FFFFFF;
+    border: 1px solid #E3E3E3;
+}
+
+.grade_add h2{
+    margin-left: 25px;
+    color: #249FE5;
+    margin-top: -28px;
+}
+
+.grade_add table{
+    width: 1950px;
+    background-color: white;
+    margin-left: 20px;
+}
+
+
+.grade_add table, th, td {
+    border-collapse: collapse;
+    border:1px solid #DEE2E6;
+    text-align: center;
+}
+
+.grade_add table, th{
+    border-collapse: collapse;
+    height: 50px;
+    border:1px solid #DEE2E6;
+    text-align: center;
+}
+
+.grade_add table #header_row{
+    cursor: pointer;
+    height: 50px;
+    color: #FFFFFF;
+    background-color: #249FE5;
+}
+
+.grade_add table #row:hover{
+    background-color: #DADADA;
+    cursor:pointer;
+}
+
+.grade_add table #row td:hover{
+    background-color: #ECECEC;
+    cursor:pointer;
+} 
 
 .add input{
     width: 300px;

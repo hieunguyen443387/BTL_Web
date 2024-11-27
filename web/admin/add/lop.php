@@ -102,29 +102,29 @@
         </tr>
 
         <?php
+            require "phan_trang.php";
             if (isset($_POST['ma_khoa']) && !empty($_POST['ma_khoa'])) {
                 $ma_khoa = $_POST['ma_khoa'];
                 $sql_lop = "SELECT ma_lop, mgv, ma_chuyen_nganh, so_luong FROM lop WHERE ma_lop in
-                (select ma_lop from danh_sach_lop_thuoc_khoa where ma_khoa = '$ma_khoa')";
+                (select ma_lop from danh_sach_lop_thuoc_khoa where ma_khoa = '$ma_khoa') LIMIT $limit OFFSET $offset";
             }
             elseif (isset($_POST['ma_nganh']) && !empty($_POST['ma_nganh'])) {
                 $ma_nganh = $_POST['ma_nganh'];
                 $sql_lop = "SELECT ma_lop, mgv, ma_chuyen_nganh, so_luong FROM lop WHERE ma_lop in
-                (select ma_lop from danh_sach_lop_thuoc_nganh where ma_nganh = '$ma_nganh')";
+                (select ma_lop from danh_sach_lop_thuoc_nganh where ma_nganh = '$ma_nganh') LIMIT $limit OFFSET $offset";
             }
             elseif (isset($_POST['ma_chuyen_nganh']) && !empty($_POST['ma_chuyen_nganh'])) {
                 $ma_chuyen_nganh = $_POST['ma_chuyen_nganh'];
-                $sql_lop = "SELECT ma_lop, mgv, ma_chuyen_nganh, so_luong FROM lop WHERE ma_lop in
-                (select ma_lop from danh_sach_lop_thuoc_chuyen_nganh where ma_chuyen_nganh = '$ma_chuyen_nganh')";
+                $sql_lop = "SELECT ma_lop, mgv, ma_chuyen_nganh, so_luong FROM lop WHERE ma_chuyen_nganh = '$ma_chuyen_nganh' LIMIT $limit OFFSET $offset";
             } else {
             // Lấy danh sách toàn bộ sinh viên
-            $sql_lop = "SELECT ma_lop, mgv, ma_chuyen_nganh, so_luong FROM lop";
+            $sql_lop = "SELECT ma_lop, mgv, ma_chuyen_nganh, so_luong FROM lop LIMIT $limit OFFSET $offset";
             }
             
             $result_lop = $conn->query($sql_lop);
 
             if ($result_lop->num_rows > 0) {
-                $stt = 1;
+                $stt = $offset + 1;
                 while($row = $result_lop->fetch_assoc()) {
                     $ma_lop = $row["ma_lop"];
                     $mgv = $row["mgv"];
@@ -152,7 +152,7 @@
                         }
                     }
                     echo '<td>' . $so_luong .  '</td>';
-                    echo '<td id="task"><a href="update_lop.php?ma_lop=' . $ma_lop . '""><i class="fa-solid fa-pen"></i><a href="delete.php?ma_lop=' . $ma_lop . '"><i class="fa-solid fa-trash"></i></a></td>';
+                    echo '<td id="task"><a href="update_lop.php?ma_lop=' . $ma_lop . '""><i class="fa-solid fa-pen"></i></a><a href="delete.php?ma_lop=' . $ma_lop . '"><i class="fa-solid fa-trash"></i></a><a href="danh_sach_lop.php?ma_lop=' . $ma_lop . '"><i class="fa-solid fa-eye"></i></a></td>';
                     
                     echo '</tr>';
                 }
@@ -165,9 +165,13 @@
     </form>  
 
 </div>
-        <div class = "space"></div>
-        
-    
+
+<?php
+    $sql_trang = "SELECT COUNT(*) AS total FROM lop";
+    $result_trang = $conn->query($sql_trang);
+    require "so_trang.php";
+?>
+          
     </div>
     
     <?php

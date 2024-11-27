@@ -5,7 +5,7 @@ if (!isset($_SESSION['msv'])) {
     exit();
 }
 
-$mgv = $_SESSION['msv'];
+$msv = $_SESSION['msv'];
 ?> 
 <!DOCTYPE html>
 <html lang="en">
@@ -25,7 +25,7 @@ $mgv = $_SESSION['msv'];
             <?php 
                 include('../home/home/config.php');
 
-                $mgv = $_SESSION['msv'];
+                $msv = $_SESSION['msv'];
                 $sql = "SELECT msv, ho_dem, ten FROM sinh_vien WHERE msv = '$msv'";
                 $result = $conn->query($sql);
 
@@ -44,7 +44,9 @@ $mgv = $_SESSION['msv'];
         </li>
             
         </ul>
-        <button><a href="/web/home/login/logout.php"><b>Đăng xuất</b></a></button>
+        <button><a href="/web/home/login/logout.php"><b><i class="fa-solid fa-right-from-bracket"></i> Đăng xuất</b></a></button>
+
+        <div id = "change_password"><a href="change_password.php?msv=<?= $msv ?>"><i>Đổi mật khẩu</i></a></div>
         
     </div>
 

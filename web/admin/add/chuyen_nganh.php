@@ -85,23 +85,24 @@
         </tr>
 
         <?php
+            require "phan_trang.php";
             if (isset($_POST['ma_khoa']) && !empty($_POST['ma_khoa'])) {
                 $ma_khoa = $_POST['ma_khoa'];
                 $sql_chuyen_nganh = "SELECT ma_chuyen_nganh, ten_chuyen_nganh, ma_nganh FROM chuyen_nganh WHERE ma_nganh in
-                (select ma_nganh from nganh where ma_khoa = '$ma_khoa')";
+                (select ma_nganh from nganh where ma_khoa = '$ma_khoa') LIMIT $limit OFFSET $offset";
             }
             elseif (isset($_POST['ma_nganh']) && !empty($_POST['ma_nganh'])) {
                 $ma_nganh = $_POST['ma_nganh'];
-                $sql_chuyen_nganh = "SELECT ma_chuyen_nganh, ten_chuyen_nganh, ma_nganh FROM chuyen_nganh WHERE ma_nganh = '$ma_nganh'";
+                $sql_chuyen_nganh = "SELECT ma_chuyen_nganh, ten_chuyen_nganh, ma_nganh FROM chuyen_nganh WHERE ma_nganh = '$ma_nganh' LIMIT $limit OFFSET $offset";
             } else {
             // Lấy danh sách toàn bộ sinh viên
-                $sql_chuyen_nganh = "SELECT ma_chuyen_nganh, ten_chuyen_nganh, ma_nganh FROM chuyen_nganh";
+                $sql_chuyen_nganh = "SELECT ma_chuyen_nganh, ten_chuyen_nganh, ma_nganh FROM chuyen_nganh LIMIT $limit OFFSET $offset";
             }
             
             $result_chuyen_nganh = $conn->query($sql_chuyen_nganh);
 
             if ($result_chuyen_nganh->num_rows > 0) {
-                $stt = 1;
+                $stt = $offset + 1;
                 while($row = $result_chuyen_nganh->fetch_assoc()) {
                     $ma_chuyen_nganh = $row["ma_chuyen_nganh"];
                     $ma_nganh = $row["ma_nganh"];
@@ -129,10 +130,12 @@
         
     </table>
     </form>  
-
 </div>
-        <div class = "space"></div>
-        
+    <?php
+        $sql_trang = "SELECT COUNT(*) AS total FROM chuyen_nganh";
+        $result_trang = $conn->query($sql_trang);
+        require "so_trang.php";
+    ?>
     
     </div>
     

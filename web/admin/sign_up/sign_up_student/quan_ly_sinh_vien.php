@@ -50,19 +50,19 @@
                 <th>Tác vụ</th>
             </tr>
             <?php
-                
+                require '../../add/phan_trang.php';
                 // Lấy danh sách sinh viên theo khoa
                 if (isset($_POST['ma_khoa']) && !empty($_POST['ma_khoa'])) {
                     $ma_khoa = $_POST['ma_khoa'];
                     $sql_sinh_vien = "SELECT msv, ho_dem, ten, ma_lop, sdt, email, ngay_sinh, gioi_tinh FROM sinh_vien WHERE msv IN 
-                    (SELECT msv FROM danh_sach_sinh_vien_khoa WHERE ma_khoa = '$ma_khoa')";
+                    (SELECT msv FROM danh_sach_sinh_vien_khoa WHERE ma_khoa = '$ma_khoa') LIMIT $limit OFFSET $offset";
                 }
 
                 // Lấy danh sách sinh viên theo ngành
                 elseif (isset($_POST['ma_nganh']) && !empty($_POST['ma_nganh'])) {
                     $ma_nganh = $_POST['ma_nganh'];
                     $sql_sinh_vien = "SELECT msv, ho_dem, ten, ma_lop, sdt, email, ngay_sinh, gioi_tinh FROM sinh_vien WHERE msv IN 
-                    (SELECT msv FROM danh_sach_sinh_vien_nganh WHERE ma_nganh = '$ma_nganh')";
+                    (SELECT msv FROM danh_sach_sinh_vien_nganh WHERE ma_nganh = '$ma_nganh') LIMIT $limit OFFSET $offset";
                     
                 }
 
@@ -70,7 +70,7 @@
                 elseif (isset($_POST['ma_chuyen_nganh']) && !empty($_POST['ma_chuyen_nganh'])) {
                     $ma_chuyen_nganh = $_POST['ma_chuyen_nganh'];
                     $sql_sinh_vien = "SELECT msv, ho_dem, ten, ma_lop, sdt, email, ngay_sinh, gioi_tinh FROM sinh_vien WHERE msv IN  
-                    (SELECT msv FROM danh_sach_sinh_vien_chuyen_nganh WHERE ma_chuyen_nganh = '$ma_chuyen_nganh')";
+                    (SELECT msv FROM danh_sach_sinh_vien_chuyen_nganh WHERE ma_chuyen_nganh = '$ma_chuyen_nganh') LIMIT $limit OFFSET $offset";
                     
                     
                 }
@@ -78,12 +78,12 @@
                 // Lấy danh sách sinh viên theo lớp
                 elseif (isset($_POST['ma_lop']) && !empty($_POST['ma_lop'])) {
                     $ma_lop = $_POST['ma_lop'];
-                    $sql_sinh_vien = "SELECT msv, ho_dem, ten, ma_lop, sdt, email, ngay_sinh, gioi_tinh FROM sinh_vien WHERE ma_lop = '$ma_lop'";
+                    $sql_sinh_vien = "SELECT msv, ho_dem, ten, ma_lop, sdt, email, ngay_sinh, gioi_tinh FROM sinh_vien WHERE ma_lop = '$ma_lop' LIMIT $limit OFFSET $offset";
                 } 
 
                 // Lấy danh sách toàn bộ sinh viên
                 else {
-                    $sql_sinh_vien = "SELECT msv, ho_dem, ten, ma_lop, sdt, email, ngay_sinh, gioi_tinh FROM sinh_vien";
+                    $sql_sinh_vien = "SELECT msv, ho_dem, ten, ma_lop, sdt, email, ngay_sinh, gioi_tinh FROM sinh_vien LIMIT $limit OFFSET $offset";
                 }
 
                 $result_sinh_vien = $conn->query($sql_sinh_vien);
@@ -116,13 +116,18 @@
                         echo '</tr>';
                     }
                 } else {
-                    echo "0 results";
+                    echo "<i style='color: red;'>Chưa có sinh viên</i>";
                 }
             ?>
             </table>
             <div class = "space"></div>
         </form>
-        </main>
+    </main>
+    <?php
+        $sql_trang = "SELECT COUNT(*) AS total FROM sinh_vien";
+        $result_trang = $conn->query($sql_trang);
+        require "../../add/phan_trang.php";
+    ?>
     </div>
     
     <?php

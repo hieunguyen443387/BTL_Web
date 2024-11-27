@@ -8,6 +8,7 @@
             <a href="/web/admin/add/lop.php"><li id = "lop">Lớp</li></a>
             <a href="/web/admin/add/nhom_hoc_phan.php"><li id = "nhom_hoc_phan">Nhóm học phần</li></a>
             <a href="/web/admin/add/sinh_vien_truot_mon.php"><li id = "truot">Sinh viên trượt môn</li></a>
+            <a href="/web/admin/add/diem_sinh_vien.php"><li id = "diem_sinh_vien">Điểm sinh viên</li></a>
         </ul>
     </div>
 </div>

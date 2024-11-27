@@ -19,7 +19,7 @@
     width: 100px;
     cursor: pointer;
 }
- 
+
 </style>
 <body>
     <div class="container">
@@ -42,6 +42,7 @@
         </tr>
 
         <?php
+            require "phan_trang.php";
             $sql_khoa = "SELECT ma_khoa, ten_khoa FROM khoa";
             $result_khoa = $conn->query($sql_khoa);
 
@@ -104,6 +105,11 @@
     
     </div>
     </form>  
+    <?php
+        $sql_trang = "SELECT COUNT(*) AS total FROM khoa";
+        $result_trang = $conn->query($sql_trang);
+        require "so_trang.php";
+    ?>
     <?php
         require "../home_admin/footer.php";
     ?>
